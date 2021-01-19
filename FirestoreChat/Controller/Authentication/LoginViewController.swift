@@ -7,8 +7,16 @@
 
 import UIKit
 
+protocol IAuthenticationVc {
+    func checkFormStatus()
+}
+
 class LoginViewController: UIViewController {
+    
     // MARK: - PROPERTIES
+    
+    private var viewModel = LoginViewModel()
+    
     private let iconImage : UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "bubble.right")
@@ -32,6 +40,8 @@ class LoginViewController: UIViewController {
         btn.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         btn.setTitleColor(.white, for: .normal)
         btn.setHeight(height: 50)
+        btn.isEnabled = false
+        btn.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return btn
     }()
     
@@ -60,18 +70,33 @@ class LoginViewController: UIViewController {
     
     // MARK: - Selectors
     
+    @objc func handleLogin(){
+        
+    }
+    
     @objc func handleShowSignUp(){
-        print("Sign up view showing....")
+        let registerController = RegistrationViewController()
+        navigationController?.pushViewController(registerController, animated: true)
+    }
+    
+    @objc func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        checkFormStatus()
     }
     
     // MARK: - Helpers
+    
     
     func ConfigureUI() {
         view.backgroundColor = .systemPurple
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
         
-        ConfigureGradientLayer()
+        configureGradientLayer()
         view.addSubview(iconImage)
         iconImage.centerX(inView: view)
         iconImage.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
@@ -87,13 +112,21 @@ class LoginViewController: UIViewController {
         view.addSubview(signUpButton)
         signUpButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
         
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
+}
+
+extension LoginViewController : IAuthenticationVc {
     
-    func ConfigureGradientLayer() {
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor , UIColor.systemPink.cgColor]
-        gradient.locations =  [0,1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+    func checkFormStatus() {
+        if viewModel.formIsValid {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        }
+        else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        }
     }
 }

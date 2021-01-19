@@ -18,6 +18,8 @@
 		ED46312E25B54A9400650F43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46312D25B54A9400650F43 /* Extensions.swift */; };
 		ED46314B25B5998F00650F43 /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46314A25B5998F00650F43 /* InputContainerView.swift */; };
 		ED46316825B5A1DA00650F43 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46316725B5A1DA00650F43 /* CustomTextField.swift */; };
+		ED46316B25B69ECB00650F43 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46316A25B69ECB00650F43 /* LoginViewModel.swift */; };
+		ED4631DC25B6C9CB00650F43 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4631DB25B6C9CB00650F43 /* RegisterViewModel.swift */; };
 		EDE825E225B145E800B4F217 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDE825E125B145E800B4F217 /* GoogleService-Info.plist */; };
 		FDC79FC5FA50CB91BAF6CC29 /* Pods_FirestoreChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC1C1F3A007A4931CC349E7 /* Pods_FirestoreChat.framework */; };
 /* End PBXBuildFile section */
@@ -37,6 +39,8 @@
 		ED46312D25B54A9400650F43 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ED46314A25B5998F00650F43 /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InputContainerView.swift; path = FirestoreChat/Controller/Authentication/InputContainerView.swift; sourceTree = SOURCE_ROOT; };
 		ED46316725B5A1DA00650F43 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTextField.swift; path = FirestoreChat/Controller/Authentication/CustomTextField.swift; sourceTree = SOURCE_ROOT; };
+		ED46316A25B69ECB00650F43 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = FirestoreChat/ViewModel/Authentication/LoginViewModel.swift; sourceTree = SOURCE_ROOT; };
+		ED4631DB25B6C9CB00650F43 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		EDE825E125B145E800B4F217 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEC1C1F3A007A4931CC349E7 /* Pods_FirestoreChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirestoreChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D604BF835A065FBE67D71E /* Pods-FirestoreChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreChat.debug.xcconfig"; path = "Target Support Files/Pods-FirestoreChat/Pods-FirestoreChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 		ECD8889A2599397C0058604B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				ED46317025B6C3A100650F43 /* Authentication */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -161,6 +166,15 @@
 			children = (
 				ED46312225B5435C00650F43 /* LoginViewController.swift */,
 				ED46312625B5436E00650F43 /* RegistrationViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		ED46317025B6C3A100650F43 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				ED46316A25B69ECB00650F43 /* LoginViewModel.swift */,
+				ED4631DB25B6C9CB00650F43 /* RegisterViewModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -281,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED46312325B5435C00650F43 /* LoginViewController.swift in Sources */,
+				ED4631DC25B6C9CB00650F43 /* RegisterViewModel.swift in Sources */,
 				ED46312E25B54A9400650F43 /* Extensions.swift in Sources */,
 				ED46314B25B5998F00650F43 /* InputContainerView.swift in Sources */,
 				ECD88884259939650058604B /* AppDelegate.swift in Sources */,
@@ -288,6 +303,7 @@
 				ECD8889F25993A7A0058604B /* ConversationsController.swift in Sources */,
 				ECD88886259939650058604B /* SceneDelegate.swift in Sources */,
 				ED46312725B5436E00650F43 /* RegistrationViewController.swift in Sources */,
+				ED46316B25B69ECB00650F43 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
