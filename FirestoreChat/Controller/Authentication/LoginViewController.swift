@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
 
 protocol IAuthenticationVc {
     func checkFormStatus()
@@ -71,7 +73,20 @@ class LoginViewController: UIViewController {
     // MARK: - Selectors
     
     @objc func handleLogin(){
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+       
+        showLoader(true, withText: "Loging in")
         
+        AuthService.shared.userLogIn(withEmail: email, password: password) { (result, error) in
+            if let error = error{
+                print("DEBUG: Failed login with error \(error.localizedDescription)")
+                self.showLoader(false)
+                return
+            }
+            self.showLoader(false)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func handleShowSignUp(){

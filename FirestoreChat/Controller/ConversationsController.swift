@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "ConversationCell"
 
@@ -15,18 +16,65 @@ class ConversationsController: UIViewController {
     // MARK: - Properties
     private let tableView = UITableView()
     
+    
+    private let newMessageBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setImage(UIImage(systemName: "plus"), for: .normal)
+        btn.backgroundColor = .systemPurple
+        btn.tintColor = .white
+        btn.imageView?.setDimensions(height: 24, width: 24)
+        btn.addTarget(self, action: #selector(openNewMessage), for: .touchUpInside)
+        return btn
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        ConfigureUI()
         super.viewDidLoad()
+        ConfigureUI()
+        authenticationUser()
     }
     
+    // MARK: - Selector
+    
     @objc func ShowProfile() {
-        print(123)
+        logout()
+    }
+    
+    @objc func openNewMessage(){
+        print("112312313")
+    }
+    
+    // MARK: - API
+    
+    func authenticationUser(){
+        if Auth.auth().currentUser?.uid == nil {
+            presentLoginScreen()
+        } else {
+            print("DEBUG: User id is \(Auth.auth().currentUser?.uid)")
+        }
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            presentLoginScreen()
+        } catch  {
+            print("DEBUG: Error signing out...")
+        }
     }
     
     
     // MARK: - Helpers
+    func presentLoginScreen() {
+        DispatchQueue.main.async {
+            let vc = LoginViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
+    }
+    
+    
     func ConfigureUI() {
         view.backgroundColor = .white
         
@@ -35,6 +83,11 @@ class ConversationsController: UIViewController {
         
         let image = UIImage(systemName: "person.circle.fill")
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(ShowProfile))
+        
+        view.addSubview(newMessageBtn)
+        newMessageBtn.setDimensions(height: 56, width: 56)
+        newMessageBtn.layer.cornerRadius = 56 / 2
+        newMessageBtn.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 16, paddingRight: 24)
     }
     
     func ConfigureTableView() {
